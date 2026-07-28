@@ -1,19 +1,25 @@
-export default function handler(req, res) {
-  res.setHeader("Content-Type", "application/xml");
+// api/rss.js
+export default async function handler(req, res) {
+  try {
+    res.setHeader("Content-Type", "application/xml");
 
-  const rss = `<?xml version="1.0" encoding="UTF-8" ?>
-  <rss version="2.0">
-    <channel>
-      <title>S7Press RSS</title>
-      <link>https://s7press.com</link>
-      <description>Son xəbərlər</description>
-      <item>
-        <title>Nümunə xəbər</title>
-        <link>https://s7press.com/test</link>
-        <description>Bu sadəcə test üçün nümunədir</description>
-      </item>
-    </channel>
-  </rss>`;
+    const rss = `<?xml version="1.0" encoding="UTF-8"?>
+    <rss version="2.0">
+      <channel>
+        <title>S7Press RSS</title>
+        <link>https://s7press.com</link>
+        <description>Son xəbərlər</description>
+        <item>
+          <title>Nümunə xəbər</title>
+          <link>https://s7press.com/test</link>
+          <description>Bu sadəcə test üçün nümunədir</description>
+        </item>
+      </channel>
+    </rss>`;
 
-  res.status(200).end(rss); // <-- vacib: end() istifadə et
+    res.status(200).send(rss); // send və ya end işləyir
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server error");
+  }
 }
