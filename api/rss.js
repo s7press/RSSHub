@@ -1,4 +1,3 @@
-// api/rss.js
 export default function handler(req, res) {
   res.setHeader("Content-Type", "application/xml");
 
@@ -16,5 +15,5 @@ export default function handler(req, res) {
     </channel>
   </rss>`;
 
-  res.status(200).send(rss);
+  res.status(200).end(rss); // <-- vacib: end() istifadə et
 }
